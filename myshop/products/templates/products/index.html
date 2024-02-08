@@ -1,0 +1,62 @@
+{% extends "products/base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+<h1>Home page</h1>
+
+<div class=" py-5 bg-body-tertiary">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for product in products %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <!--            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
+                    <img src="{{ product.image.url }}" alt="" width="100%" height="225">
+                    <div class="card-body">
+                        <p class="card-text">{{ product.name }}</p>
+                        <p class="card-text">{{ product.price }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{% url 'products:detail' product.id %}" type="button"
+                                   class="btn btn-sm btn-outline-secondary">View</a>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Buy Now</button>
+                                <!-- add to cart and take the user to checkout page-->
+                            </div>
+                            <small class="text-body-secondary"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <h2 class="mt-5 text-center">Categories</h2>
+
+    <div class=" py-5 bg-body-tertiary">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for category in categories %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body bg-dark text-white">
+                            <p class="card-text">{{ category.name }}</p>
+                            <p class="card-text">{{ category.products.count }}<em> items</em></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                </div>
+                                <small class="text-body-secondary"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

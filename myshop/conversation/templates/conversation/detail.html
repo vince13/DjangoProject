@@ -1,0 +1,38 @@
+{% extends "products/base.html" %}
+
+{% block title %}Inbox{% endblock title %}
+
+{% block content %}
+<!--<h1>Inbox</h1>-->
+<!--<div class="mb-4">-->
+<!--    {% for conversation in conversations %}-->
+<!--    <a href="">-->
+<!--        <div class="">-->
+<!--            <div class="">-->
+<!--                <img src="{{ conversation.item.image.url }}" alt="" class="w-50 rounded-xl">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </a>-->
+<!--    {% endfor %}-->
+<!--</div>-->
+<div class="container mt-4">
+    <div class="space-y-6">
+        <a href="#" class="text-decoration-none">
+            <div class="p-3 d-flex bg-light rounded-xl">
+                <div class="p-5">
+                    {% for message in conversation.messages.all %}
+                            <p class="mb-4"><strong>{{ message.created_by.username }}</strong> | @{{ message.created_at }}</p>
+                            <p>{{ message.content }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </a>
+        <hr>
+    </div>
+</div>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-outline-success">Send</button>
+</form>
+{% endblock content %}
